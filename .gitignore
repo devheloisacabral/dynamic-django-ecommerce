@@ -1,0 +1,42 @@
+# Mac
+.DS_Store
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Python
+*.pyc
+*.pyo
+__pycache__/
+
+# Django
+*.sqlite3
+*.log
+*.pot
+*.pyc
+*.pyo
+__pycache__/
+db.sqlite3
+media/
+static/
+
+# VS Code
+.vscode/
+
+# JetBrains IDEs (IntelliJ, PyCharm, WebStorm, etc.)
+.idea/
+
+# macOS
+Thumbs.db
+Desktop.ini
+
+# Windows
+ehthumbs.db
+Icon?
+
+# Env
+.env
+.env.*
+/env
