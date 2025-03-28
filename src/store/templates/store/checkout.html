@@ -45,6 +45,7 @@
 				<small>Paypal Options</small>
 				<button id="make-payment">Make payment</button>
 			</div>
+
 		</div>
 
 		<div class="col-lg-6">
@@ -53,14 +54,16 @@
 				<hr>
 				<h3>Order Summary</h3>
 				<hr>
+				{% for item in items %}
 				<div class="cart-row">
-					<div style="flex:2"><img class="row-image" src="{% static 'images/placeholder.png' %}"></div>
-					<div style="flex:2"><p>Product 1</p></div>
-					<div style="flex:1"><p>$20.00</p></div>
-					<div style="flex:1"><p>x2</p></div>
+					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+					<div style="flex:2"><p>{{item.product.name}}</p></div>
+					<div style="flex:1"><p>${{item.product.price|floatformat:2}}</p></div>
+					<div style="flex:1"><p>x{{item.quantity}}</p></div>
 				</div>
-				<h5>Items:   2</h5>
-				<h5>Total:   $4</h5>
+				{% endfor %}
+				<h5>Items:   {{order.get_cart_items}}</h5>
+				<h5>Total:   ${{order.get_cart_total|floatformat:2}}</h5>
 			</div>
 		</div>
 	</div>
@@ -94,7 +97,6 @@
 	    })
 
 	    function submitFormData(){
-
 	    	var userFormData = {
 				'name':null,
 				'email':null,
@@ -132,10 +134,16 @@
 	    	})
 	    	.then((response) => response.json())
 	    	.then((data) => {
-				  alert('Transaction completed');
-				  window.location.href = "{% url 'store' %}"
+				alert('Transaction completed');
+
+				cart = {}
+				document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+
+				window.location.href = "{% url 'store' %}"
 
 				})
 	    }
 	</script>
 {% endblock content %}
+
+
